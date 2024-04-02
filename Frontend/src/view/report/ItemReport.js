@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { checkDate, getCurrentDate } from "../../util/report";
 import { useGetItemMutation } from "../../service/Api";
 import ItemReportBtn from "../../components/Excel/ItemReportBtn";
+import NavContext from "../../context/NavContext";
 
 const ItemReport = () => {
   const [date, setDate] = useState({ start: "", end: "" });
@@ -10,6 +11,15 @@ const ItemReport = () => {
   const [item, setItem] = useState();
   const [filterItem, setFilterItem] = useState();
   const [getItems] = useGetItemMutation();
+
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("itemreport");
+  }, [nav, setNav]);
+
+
   useEffect(() => {
     const { currentDate } = getCurrentDate();
     setFromDate(

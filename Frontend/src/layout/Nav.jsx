@@ -47,52 +47,54 @@ const Nav = () => {
       setTheme(color);
       setShow(false);
     };
-    const dynamicClass = `w-10 h-10 rounded-full ${bg}`;
+    const dynamicClass = `w-10 rounded-full ${bg}`;
     return <div className={dynamicClass} onClick={() => setColor(value)}></div>;
   };
 
   return (
-    <div className="flex justify-between items-center bg-skin-nav w-full shadow-md py-2  ">
-      <img
-        src={icons.bePos}
-        alt="mula_logo"
-        className="w-[70px] h-auto object-cover ml-10"
-      />
-      <div className="flex gap-3 mr-5 items-center justify-center">
-        {navLinks?.map((link) => (
-          <div key={link.id}>
-            <Link
-              to={link.pathname}
-              className={classNames(
-                pathname === link.pathname
-                  ? "bg-skin-fill text-white"
-                  : "text-secondary",
-                linkClass
-              )}
-            >
-              <img src={link.icon} alt="" className="w-6 h-6" />
-              <h1>{link.name}</h1>
-            </Link>
-          </div>
-        ))}
-        <div className="">
-          {show ? (
-            <img
-              src={icon.setting}
-              className="w-6 h-6 animate-spin"
-              alt=""
-              onClick={() => setShow(false)}
-            />
-          ) : (
-            <img
-              src={icon.setting}
-              className="w-6 h-6 "
-              alt=""
-              onClick={() => setShow(true)}
-            />
-          )}
+    <div className="h-[11vh]">
+      <div className="flex justify-between items-center bg-skin-nav w-full h-full shadow-md py-2  ">
+        <img
+          src={icons.bePos}
+          alt="mula_logo"
+          className="w-[70px] h-auto object-cover ml-10"
+        />
+        <div className="flex gap-3 mr-5 items-center justify-center">
+          {navLinks?.map((link) => (
+            <div key={link.id}>
+              <Link
+                to={link.pathname}
+                className={classNames(
+                  pathname === link.pathname
+                    ? "bg-skin-fill text-white"
+                    : "text-secondary",
+                  linkClass
+                )}
+              >
+                <img src={link.icon} alt="" className="w-6 h-6" />
+                <h1>{link.name}</h1>
+              </Link>
+            </div>
+          ))}
+          <div className="">
+            {show ? (
+              <img
+                src={icon.setting}
+                className="w-6 h-6 animate-spin"
+                alt=""
+                onClick={() => setShow(false)}
+              />
+            ) : (
+              <img
+                src={icon.setting}
+                className="w-6 h-6 "
+                alt=""
+                onClick={() => setShow(true)}
+              />
+            )}
 
-          {show && <ColorButton />}
+            {show && <ColorButton />}
+          </div>
         </div>
       </div>
     </div>

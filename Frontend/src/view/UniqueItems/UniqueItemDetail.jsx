@@ -1,11 +1,18 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { useGetSingleUniqueItemQuery } from "../../service/Api";
 import { icons } from "../../constant";
+import NavContext from "../../context/NavContext";
 
 const UniqueItemDetail = () => {
   const { id } = useParams();
   const { data: blog } = useGetSingleUniqueItemQuery(id);
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("unique");
+  }, [nav]);
   console.log(blog);
   return (
     <div className="bg-bg w-full p-7">

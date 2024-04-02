@@ -23,7 +23,7 @@ const InvoiceReportView = () => {
   // Start useEffect
   useEffect(() => {
     // setOrderItems(orders);
-    setNav("invoicereport");
+    setNav("salereport");
 
     const { currentDate } = getCurrentDate();
     // for Input

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { checkExpenseInputHandler } from "../../util/item";
 import {
   useGetSingleExpenseQuery,
   useUpdateExpenseMutation,
 } from "../../service/Api";
+import NavContext from "../../context/NavContext";
 
 const EditExpense = () => {
   const navigate = useNavigate();
@@ -14,6 +15,12 @@ const EditExpense = () => {
   const [expenseFor, setExpenseFor] = useState("");
   const [error, setError] = useState({});
   const [updateExpense] = useUpdateExpenseMutation(id);
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("expense");
+  }, [nav, setNav]);
 
   useEffect(() => {
     if (data) {

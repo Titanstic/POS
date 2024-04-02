@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { icons } from "../../constant";
 import { useGetPromotionQuery } from "../../service/Api";
 import AlertContext from "../../context/AlertContext";
+import NavContext from "../../context/NavContext";
 
 const Promotion = () => {
   const { data } = useGetPromotionQuery();
@@ -10,6 +11,13 @@ const Promotion = () => {
   const navigate = useNavigate();
   const { showDelete, setShowDelete, setItemId, setUnique } =
     useContext(AlertContext);
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("promotion");
+  }, [nav, setNav]);
+
   // const [search,setSearch] = useState()
   useEffect(() => {
     setPromotion(data);

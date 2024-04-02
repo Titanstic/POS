@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { checkDate, getCurrentDate } from "../../util/report";
 import {
   useGetExpenseDataMutation,
@@ -7,6 +7,7 @@ import {
   useGetRentalDataMutation,
 } from "../../service/Api";
 import ProfitReportBtn from "../../components/Excel/ProfitReportBtn";
+import NavContext from "../../context/NavContext";
 
 const ProfitNLoss = () => {
   const [date, setDate] = useState({ start: "", end: "" });
@@ -22,6 +23,13 @@ const ProfitNLoss = () => {
   const [getExpense] = useGetExpenseDataMutation();
   const [getOrder] = useGetOrdersMutation();
   const [getRental] = useGetRentalDataMutation();
+
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("profit");
+  }, [nav, setNav]);
 
   console.log(sale)
   const totalPurchase = purchase?.reduce(

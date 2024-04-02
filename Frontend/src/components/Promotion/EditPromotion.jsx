@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useGetCategoryQuery, useGetSinglePromotionQuery, useUpdatePromotionMutation } from '../../service/Api';
 import { checkUpdatePromotionInptHandler } from '../../util/item';
+import NavContext from "../../context/NavContext";
 
 const EditPromotion = () => {
   const { id } = useParams();
@@ -17,6 +18,13 @@ const EditPromotion = () => {
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
   const navigate = useNavigate();
+
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("promotion");
+  }, [nav, setNav]);
 
   useEffect(() => {
     if (promotion) {

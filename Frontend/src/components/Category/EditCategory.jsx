@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   useGetSingleCategoryQuery,
   useUpdateCategoryMutation,
 } from "../../service/Api";
+import NavContext from "../../context/NavContext";
 
 const EditCategory = () => {
   const [category, setCategory] = useState({});
@@ -12,6 +13,12 @@ const EditCategory = () => {
   const { id } = useParams();
   const { data } = useGetSingleCategoryQuery(id);
   const [updateCategory] = useUpdateCategoryMutation(id);
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("category");
+  }, [nav, setNav]);
 
   useEffect(() => {
     if (data) {

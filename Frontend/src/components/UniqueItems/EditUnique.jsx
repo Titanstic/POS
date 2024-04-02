@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   useGetSingleUniqueItemQuery,
   useUpdateUniqueItemMutation,
 } from "../../service/Api";
 import { checkUniqueInputHandle } from "../../util/item";
+import NavContext from "../../context/NavContext";
 
 const EditUnique = () => {
   const { id } = useParams();
@@ -22,6 +23,12 @@ const EditUnique = () => {
 
   const [updateUniqueItem] = useUpdateUniqueItemMutation(id);
 
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("unique");
+  }, [nav]);
   const updateHandler = async (e) => {
     e.preventDefault();
 

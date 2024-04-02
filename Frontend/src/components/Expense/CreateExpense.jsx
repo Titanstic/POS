@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { usePostExpenseMutation } from "../../service/Api";
 import { checkExpenseInputHandler } from "../../util/item";
+import NavContext from "../../context/NavContext";
 
 const Expense = () => {
   const navigate = useNavigate();
@@ -13,7 +14,11 @@ const Expense = () => {
   const [expense] = usePostExpenseMutation();
   const [error, setError] = useState({});
   const [show, setShow] = useState(false);
-  console.log(error);
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("expense");
+  }, [nav, setNav]);
 
   const expenseHandler = (e) => {
     e.preventDefault();

@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { useAddCategoryMutation } from "../../service/Api";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import NavContext from "../../context/NavContext";
 
 const CreateCategory = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [addCategory] = useAddCategoryMutation();
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("category");
+  }, [nav, setNav]);
 
   const addCategoryHandler = async (e) => {
     e.preventDefault();

@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { useGetRentalQuery } from "../../service/Api";
 import { icons } from "../../constant";
+import NavContext from "../../context/NavContext";
 
 const Rent = () => {
   const { data } = useGetRentalQuery();
   const [rent, setRent] = useState();
   const [searchRent,setSearchRent] = useState()
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("rental");
+  }, [nav, setNav]);
+
   useEffect(() => {
     setRent(data);
   }, [data]);

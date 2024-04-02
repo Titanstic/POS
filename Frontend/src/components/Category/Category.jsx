@@ -11,7 +11,6 @@ const Category = () => {
 
   const { data: categories, isLoading } = useGetCategoryQuery();
   const { nav, setNav } = useContext(NavContext);
-  console.log(nav);
 
   useEffect(() => {
     setNav("category");

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetCategoryQuery,
@@ -6,6 +6,7 @@ import {
   useUpdateNonUniqueItemMutation,
 } from "../../service/Api";
 import { checkNonUniqueInputHandle } from "../../util/item";
+import NavContext from "../../context/NavContext";
 
 const EditNonUnique = () => {
   const { id } = useParams();
@@ -25,6 +26,15 @@ const EditNonUnique = () => {
   const [discount, setDiscount] = useState();
   const [selectedCategoryId, setCategoryId] = useState("");
   const [profit, setProfit] = useState(null);
+
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("nonunique");
+  }, [nav]);
+
+
   useEffect(() => {
     const profitMargin = ((salePrice - purchasePrice) / purchasePrice) * 100;
     setProfit(profitMargin);

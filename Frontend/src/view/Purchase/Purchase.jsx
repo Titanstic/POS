@@ -6,6 +6,8 @@ import { icons } from "../../constant";
 const Purchase = () => {
   const [purchase, setPurchase] = useState();
   const { data } = useGetPurchaseQuery();
+
+
   // console.log(data);
   useEffect(() => {
     setPurchase(data);

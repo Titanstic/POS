@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAddUniqueItemMutation } from "../../service/Api";
 import { Link, useNavigate } from "react-router-dom";
 import { checkUniqueInputHandle } from "../../util/item";
+import NavContext from "../../context/NavContext";
 
 const CreateUnique = () => {
   const navigate = useNavigate();
@@ -15,6 +16,12 @@ const CreateUnique = () => {
   const [image, setImage] = useState(null);
   const [discount, setDiscount] = useState(0);
   const [owner, setOwner] = useState("");
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("unique");
+  }, [nav]);
 
   // Start Function
   const createHandler = async (e) => {
@@ -123,9 +130,8 @@ const CreateUnique = () => {
                 type="text"
                 value={name}
                 onChange={(e) => inputHandle(e.target.value, "name")}
-                className={`w-full border ${
-                  error.name ? "border-skin-red" : "border-skin-border"
-                } shadow-md rounded-md bg-transparent p-2 focus:outline-none focus:shadow-outline `}
+                className={`w-full border ${error.name ? "border-skin-red" : "border-skin-border"
+                  } shadow-md rounded-md bg-transparent p-2 focus:outline-none focus:shadow-outline `}
               />
               {error.name && (
                 <p className="text-skin-red text-sm absolute bottom-100 right-0">
@@ -143,9 +149,8 @@ const CreateUnique = () => {
                 type="text"
                 value={category}
                 onChange={(e) => inputHandle(e.target.value, "category")}
-                className={`w-full border ${
-                  error.category ? "border-skin-red" : "border-skin-border"
-                } shadow-md rounded-md bg-transparent p-2 mt-3 focus:outline-none focus:shadow-outline `}
+                className={`w-full border ${error.category ? "border-skin-red" : "border-skin-border"
+                  } shadow-md rounded-md bg-transparent p-2 mt-3 focus:outline-none focus:shadow-outline `}
               />
               {error.category && (
                 <p className="text-skin-red text-sm absolute bottom-100 right-0">
@@ -165,9 +170,8 @@ const CreateUnique = () => {
                 type="text"
                 value={purchasePrice}
                 onChange={(e) => inputHandle(e.target.value, "purchase price")}
-                className={`w-full border ${
-                  error.purchasePrice ? "border-skin-red" : "border-skin-border"
-                } shadow-md rounded-md bg-transparent p-2 mt-3 focus:outline-none focus:shadow-outline `}
+                className={`w-full border ${error.purchasePrice ? "border-skin-red" : "border-skin-border"
+                  } shadow-md rounded-md bg-transparent p-2 mt-3 focus:outline-none focus:shadow-outline `}
               />
               {error.purchasePrice && (
                 <p className="text-skin-red text-sm absolute bottom-100 right-0">
@@ -185,9 +189,8 @@ const CreateUnique = () => {
                 type="text"
                 value={salePrice}
                 onChange={(e) => inputHandle(e.target.value, "sale price")}
-                className={`w-full border ${
-                  error.salePrice ? "border-skin-red" : "border-skin-border"
-                } shadow-md rounded-md bg-transparent p-2 mt-3 focus:outline-none focus:shadow-outline `}
+                className={`w-full border ${error.salePrice ? "border-skin-red" : "border-skin-border"
+                  } shadow-md rounded-md bg-transparent p-2 mt-3 focus:outline-none focus:shadow-outline `}
               />
               {error.salePrice && (
                 <p className="text-skin-red text-sm absolute bottom-100 right-0">
@@ -222,9 +225,8 @@ const CreateUnique = () => {
                 type="text"
                 value={note}
                 onChange={(e) => inputHandle(e.target.value, "note")}
-                className={`w-full border ${
-                  error.note ? "border-skin-red" : "border-skin-border"
-                } shadow-md rounded-md bg-transparent p-2 mt-3 focus:outline-none focus:shadow-outline `}
+                className={`w-full border ${error.note ? "border-skin-red" : "border-skin-border"
+                  } shadow-md rounded-md bg-transparent p-2 mt-3 focus:outline-none focus:shadow-outline `}
               />
 
               {error.note && (
@@ -244,9 +246,8 @@ const CreateUnique = () => {
                 type="text"
                 value={owner}
                 onChange={(e) => inputHandle(e.target.value, "owner")}
-                className={`w-full border ${
-                  error.owner ? "border-skin-red" : "border-skin-border"
-                }  rounded-md bg-transparent p-2 mt-3 focus:outline-none focus:shadow-outline shadow-md`}
+                className={`w-full border ${error.owner ? "border-skin-red" : "border-skin-border"
+                  }  rounded-md bg-transparent p-2 mt-3 focus:outline-none focus:shadow-outline shadow-md`}
               />
               {error.owner && (
                 <p className="text-skin-red text-sm absolute bottom-100 right-0">

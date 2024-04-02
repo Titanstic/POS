@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Link, useParams } from "react-router-dom";
 import { useGetSingleRentalQuery } from "../../service/Api";
+import NavContext from "../../context/NavContext";
 
 const DetailRental = () => {
   const { id } = useParams();
   const { data } = useGetSingleRentalQuery(id);
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("rental");
+  }, [nav, setNav]);
 
   const [rental, setRental] = useState();
   useEffect(() => {

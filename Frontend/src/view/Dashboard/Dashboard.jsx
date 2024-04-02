@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { icons } from '../../constant'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Cell, Legend, ReferenceLine, CartesianGrid } from 'recharts';
 
@@ -9,6 +9,7 @@ import {
   useGetPurchasesMutation,
   useGetRentalDataMutation,
 } from "../../service/Api";
+import NavContext from "../../context/NavContext";
 
 
 
@@ -476,7 +477,15 @@ const Dashboard = () => {
   const [getRental] = useGetRentalDataMutation();
   const [getSale] = useGetOrdersMutation();
   const [getItem] = useGetItemMutation()
-  console.log(item, " item")
+
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("dashboard");
+  }, [nav, setNav]);
+
+
   useEffect(() => {
     fetchData();
   }, [view]);
@@ -531,7 +540,7 @@ const Dashboard = () => {
       console.error(error);
     }
   };
-  console.log(rental)
+  // console.log(rental)
 
   let totalExpense = [];
   let totalRental = [];
@@ -565,11 +574,11 @@ const Dashboard = () => {
         : groupByYearAndCalculate(totalExpense, totalRental, totalSale);
 
 
-  console.log(totalExpense, 'expense')
-  console.log(totalPurchase, 'purchase ')
-  console.log(totalSale, 'sale')
-  console.log(totalRental, 'rental')
-  console.log(data)
+  // console.log(totalExpense, 'expense')
+  // console.log(totalPurchase, 'purchase ')
+  // console.log(totalSale, 'sale')
+  // console.log(totalRental, 'rental')
+  // console.log(data)
 
   return (
     <div className='w-full p-7'>

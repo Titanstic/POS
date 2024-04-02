@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { checkSupplierInputHandle } from "../../util/item";
 import { usePostSupplierMutation } from "../../service/Api";
+import NavContext from "../../context/NavContext";
 const CreateSupplier = () => {
   const navigate = useNavigate()
   const [name, setName] = useState("");
@@ -12,6 +13,13 @@ const CreateSupplier = () => {
   const [note, setNote] = useState("");
   const [error,setError] = useState({})
   const [postSupplier] = usePostSupplierMutation()
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("supplier");
+  }, [nav, setNav]);
+
   const inputHandler = (e, input) => {
     switch (input) {
       case "name":

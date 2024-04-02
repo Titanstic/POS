@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   useGetCategoryQuery,
   usePostPromotionMutation,
 } from "../../service/Api";
 import { checkPromotionInptHandler } from "../../util/item";
+import NavContext from "../../context/NavContext";
 const CreatePromotion = () => {
   const navigate = useNavigate()
   const [name, setName] = useState("");
@@ -15,6 +16,14 @@ const CreatePromotion = () => {
   const [error, setError] = useState({});
   const { data } = useGetCategoryQuery();
   const [postPromo] = usePostPromotionMutation();
+
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("promotion");
+  }, [nav, setNav]);
+
   const inputHandler = (e, input) => {
     switch (input) {
       case "name":

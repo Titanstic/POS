@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {
   useAddCategoryMutation,
   useAddNonUniqueItemMutation,
@@ -7,6 +7,7 @@ import {
 import { icons } from "../../constant";
 import { useNavigate } from "react-router-dom";
 import { checkNonUniqueInputHandle } from "../../util/item";
+import NavContext from "../../context/NavContext";
 
 const CreateNonUnique = () => {
   const navigate = useNavigate();
@@ -32,6 +33,11 @@ const CreateNonUnique = () => {
   const [catName, setCatName] = useState("");
   const [postCat] = useAddCategoryMutation();
   const { data } = useGetCategoryQuery();
+
+  const { nav, setNav } = useContext(NavContext);
+  useEffect(() => {
+    setNav("nonunique");
+  }, [nav]);
 
   // Start Function
   // const calculateProfitMargin = () => {
@@ -176,9 +182,8 @@ const CreateNonUnique = () => {
                 type="text"
                 value={name}
                 onChange={(e) => inputHandle(e.target.value, "name")}
-                className={`w-full border ${
-                  error.name ? "border-skin-red" : "border-skin-fill"
-                } focus:outline-none shadow-md rounded-md bg-transparent p-2`}
+                className={`w-full border ${error.name ? "border-skin-red" : "border-skin-fill"
+                  } focus:outline-none shadow-md rounded-md bg-transparent p-2`}
               />
               {error.name && (
                 <p className="text-skin-red text-sm absolute bottom-100 right-0">
@@ -213,11 +218,10 @@ const CreateNonUnique = () => {
                 onChange={(e) =>
                   inputHandle(e.target.value, "selectedCategoryId")
                 }
-                className={`w-full border ${
-                  error.selectedCategoryId
+                className={`w-full border ${error.selectedCategoryId
                     ? "border-error"
                     : "border--skin-fill"
-                } shadow-md focus:outline-none rounded-md bg-transparent p-2 `}
+                  } shadow-md focus:outline-none rounded-md bg-transparent p-2 `}
               >
                 <option>Select Category</option>
 
@@ -253,9 +257,8 @@ const CreateNonUnique = () => {
                 type="text"
                 value={purchasePrice}
                 onChange={(e) => inputHandle(e.target.value, "price")}
-                className={`w-full border ${
-                  error.price ? "border-error" : "border-skin-border"
-                } shadow-md focus:outline-none rounded-md bg-transparent p-2 mt-3`}
+                className={`w-full border ${error.price ? "border-error" : "border-skin-border"
+                  } shadow-md focus:outline-none rounded-md bg-transparent p-2 mt-3`}
               />
               {error.price && (
                 <p className="text-skin-red text-sm absolute bottom-100 right-0">
@@ -310,9 +313,8 @@ const CreateNonUnique = () => {
                 type="text"
                 value={minQty}
                 onChange={(e) => inputHandle(e.target.value, "min qty")}
-                className={`w-full border ${
-                  error.minQty ? "border-error" : "border-skin-border"
-                } shadow-md focus:outline-none rounded-md bg-transparent p-2 mt-3`}
+                className={`w-full border ${error.minQty ? "border-error" : "border-skin-border"
+                  } shadow-md focus:outline-none rounded-md bg-transparent p-2 mt-3`}
               />
               {error.minQty && (
                 <p className="text-skin-red text-sm absolute bottom-100 right-0">
@@ -378,9 +380,8 @@ const CreateNonUnique = () => {
                 type="text"
                 value={qty}
                 onChange={(e) => inputHandle(e.target.value, "qty")}
-                className={`w-full border ${
-                  error.qty ? "border-skin-red" : "border--skin-fill"
-                } shadow-md focus:outline-none rounded-md bg-transparent p-2 mt-3`}
+                className={`w-full border ${error.qty ? "border-skin-red" : "border--skin-fill"
+                  } shadow-md focus:outline-none rounded-md bg-transparent p-2 mt-3`}
               />
 
               {error.qty && (
@@ -391,7 +392,7 @@ const CreateNonUnique = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <label htmlFor="" className="text-black font-normal mb-5">
+            <label htmlFor="" className="text-black font-normal mb-3">
               Note
             </label>
             <div className="relative">
@@ -399,9 +400,8 @@ const CreateNonUnique = () => {
                 type="text"
                 value={note}
                 onChange={(e) => inputHandle(e.target.value, "note")}
-                className={`w-full border ${
-                  error.note ? "border-error" : "border--skin-fill"
-                } shadow-md focus:outline-none rounded-md bg-transparent p-2 `}
+                className={`w-full border ${error.note ? "border-error" : "border--skin-fill"
+                  } shadow-md focus:outline-none rounded-md bg-transparent p-2 `}
               />
 
               {error.note && (
@@ -411,7 +411,7 @@ const CreateNonUnique = () => {
               )}
             </div>
           </div>
-       
+
         </div>
         <div className="absolute right-7">
           <button

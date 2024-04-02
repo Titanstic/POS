@@ -1,12 +1,22 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { useGetSinglePurchaseQuery } from "../../service/Api";
 import { Link } from "react-router-dom";
+import NavContext from "../../context/NavContext";
 
 const PurchaseDetail = () => {
   const { id } = useParams();
   const { data } = useGetSinglePurchaseQuery(id);
   console.log(data);
+
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("purchasereport");
+  }, [nav, setNav]);
+
+
   return (
     <div className="w-full p-5">
       <div className="flex justify-between">

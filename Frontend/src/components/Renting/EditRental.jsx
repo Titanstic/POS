@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetSingleRentalQuery,
   useUpdateRentalMutation,
 } from "../../service/Api";
+import NavContext from "../../context/NavContext";
 
 const EditRental = () => {
   const { id } = useParams();
@@ -19,6 +20,12 @@ const EditRental = () => {
   const [paymentType, setPaymentType] = useState();
   const navigate = useNavigate();
   const [updateRental] = useUpdateRentalMutation();
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("rental");
+  }, [nav, setNav]);
 
   useEffect(() => {
     setName(data?.name);

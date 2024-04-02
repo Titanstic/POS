@@ -1,9 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import { useGetSingleNonUniqueItemQuery } from "../../service/Api";
 import { useParams } from "react-router-dom";
 // import Barcode from "react-barcode";
 import ReactToPrint from "react-to-print";
 import PrintComponent from "./PrintBarCodeComponent";
+import NavContext from "../../context/NavContext";
 // import { icons } from "../../constant";
 // import BarcodeGenerator from "../BarcodeGenerator";
 const NonUniqueDetail = () => {
@@ -14,6 +15,12 @@ const NonUniqueDetail = () => {
   const { data: blog } = useGetSingleNonUniqueItemQuery(id);
   console.log(blog);
   const printRef = useRef();
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("nonunique");
+  }, [nav]);
   // console.log(ref);
   const addQty = () => {
     setQty(qty + 1);

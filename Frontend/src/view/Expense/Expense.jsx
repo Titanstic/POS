@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { checkDate, getCurrentDate } from "../../util/report";
 import { Link } from "react-router-dom";
 import { icons } from "../../constant";
 import { useGetExpenseDataMutation } from "../../service/Api";
 import ExpenseExcelBtn from "../../components/Excel/ExpenseExcelBtn";
+import NavContext from "../../context/NavContext";
 
 const Expense = () => {
   const [date, setDate] = useState({ start: "", end: "" });
@@ -11,6 +12,12 @@ const Expense = () => {
   const [toDate, setToDate] = useState("");
   const [expense, setExpense] = useState([]);
   const [getExpense] = useGetExpenseDataMutation();
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("expense");
+  }, [nav, setNav]);
+
   // console.log(expense);
   useEffect(() => {
     const { currentDate } = getCurrentDate();

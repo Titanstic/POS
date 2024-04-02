@@ -101,8 +101,8 @@ const Home = () => {
 
   return (
     <div className="w-full h-screen overflow-hidden">
-      <div className="h-[12%]">{toggle && <Nav />}</div>
-      <div className="h-[88%] flex ">
+     {toggle && <Nav />}
+      <div className="h-[89vh] flex ">
         {toggle && <Sidebar />}
         <Routes>
           <Route path="unique" element={<AllUniqueItems />} />

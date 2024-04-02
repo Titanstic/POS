@@ -1,10 +1,17 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { icons } from "../../constant";
 import { useGetSupplierQuery } from "../../service/Api";
+import NavContext from "../../context/NavContext";
 
 const Supplier = () => {
   const { data } = useGetSupplierQuery();
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("supplier");
+  }, [nav, setNav]);
+
   return (
     <div className="w-full p-7">
       <div className="flex justify-between items-center">

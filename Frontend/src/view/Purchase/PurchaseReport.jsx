@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { useGetPurchasesMutation } from "../../service/Api";
 import { icons } from "../../constant";
 import { Link } from "react-router-dom";
 import PurchaseReportBtn from "../../components/Excel/PurchaseReportBtn";
 import { checkDate, getCurrentDate } from "../../util/report";
+import NavContext from "../../context/NavContext";
 const PurchaseReport = () => {
   // const { data } = useGetPurchaseQuery();
   const [date, setDate] = useState({ start: "", end: "" });
@@ -11,6 +12,13 @@ const PurchaseReport = () => {
   const [toDate, setToDate] = useState("");
   const [purchaseReports, setPurchaseReports] = useState(null);
   const [getPurchase] = useGetPurchasesMutation();
+
+
+  const { nav, setNav } = useContext(NavContext);
+
+  useEffect(() => {
+    setNav("purchasereport");
+  }, [nav, setNav]);
 
   useEffect(() => {
     const { currentDate } = getCurrentDate();

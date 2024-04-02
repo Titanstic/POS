@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { checkRentalInputHandle } from "../../util/item";
 import { usePostRentalMutation } from "../../service/Api";
 import { useNavigate ,Link} from "react-router-dom";
+import NavContext from "../../context/NavContext";
 
 const CreateRental = () => {
   const [error, setError] = useState({});
@@ -14,7 +15,11 @@ const CreateRental = () => {
   const [paymentType, setPaymentType] = useState();
   const [postRental] = usePostRentalMutation();
   const navigate = useNavigate();
+  const { nav, setNav } = useContext(NavContext);
 
+  useEffect(() => {
+    setNav("rental");
+  }, [nav, setNav]);
   const inputHandle = (e, input) => {
     switch (input) {
       case "name":
