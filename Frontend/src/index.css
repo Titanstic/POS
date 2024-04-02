@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --text-color: #000000;
+    --bg-color: #efab22;
+    --danger-color: #b3261e;
+    --boder-color: #67748e;
+    --nav-color: #fbe9c6;
+  }
+  .theme-dark {
+    --text-color: rgb(51 65 85);
+    --bg-color: rgb(148 163 184);
+    --danger-color: #b3261e;
+    --border-color: #67748e;
+    --nav-color: #fbe9c6;
+  }
+  .theme-purple {
+    --text-color: rgb(147 51 234);
+    --bg-color: rgb(192 132 252);
+    --danger-color: #b3261e;
+    --border-color: rgba(137, 60, 209, 0.746);
+    --nav-color: #e1c8f9;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond&family=Open+Sans:wght@300&family=Outfit&family=Poppins&family=Sofia+Sans+Semi+Condensed:wght@400;600&display=swap");
+/* @import "~material-design-icons/iconfont/material-icons.css";    
+ */
+
+/* @import "material-design-icons/iconfont/material-icons.css  "  */
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: #fbe9c6;
+  opacity: 0.5;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--bg-color);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.no-spinners::-webkit-inner-spin-button,
+.no-spinners::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
