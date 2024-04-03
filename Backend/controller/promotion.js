@@ -9,11 +9,13 @@ router.get("/", async (req, res) => {
       order: [["id", "DESC"]],
       include: Category,
     });
+    console.log("promotion-----", promotion.length)
     return res.status(200).json(promotion);
   } catch (e) {
     return res.status(500).json(e.message);
   }
 });
+
 router.get('/:id',async(req,res)=>{
   const promotionId = req.params.id;
   // console.log(promotionId)
@@ -28,9 +30,9 @@ router.get('/:id',async(req,res)=>{
     return res.status(500).json(e.message)
   }
 })
+
 router.post("/", async (req, res) => {
-  const { name, selectedCategory, promotionValue, startDate, endDate } =
-    req.body;
+  const { name, selectedCategory, promotionValue, startDate, endDate } = req.body;
   try {
   const promotionData =  await Promotion.create({
       name,
@@ -41,6 +43,7 @@ router.post("/", async (req, res) => {
     });
 
     const promoId = promotionData.id;
+   
     await Items.update(
       { promotionId : promoId },
       {
@@ -49,9 +52,6 @@ router.post("/", async (req, res) => {
         },
       }
     );
-
-    
-
     return res.status(200).json({ msg: "promotion added" });
   } catch (e) {
     return res.status(500).json(e.message);
@@ -61,15 +61,42 @@ router.post("/", async (req, res) => {
 router.put("/:id", async(req,res)=>{
   const promotionId = req.params.id;
   const { name, promotionValue, category, startDate, endDate } = req.body;
-  console.log(name, promotionValue, startDate, endDate);
+
   try{
+    const singlePromotion = await Promotion.findOne({ 
+      where: { id: promotionId }
+    })
+    console.log("categoryid", singlePromotion.dataValues.categoryId);
+
     await Promotion.update(
       {
         name, promotionValue, startDate, endDate, categoryId : category
       },
       {where: { id: promotionId}}
       );
-    
+
+    if(category !== singlePromotion.dataValues.categoryId){
+      // for change category id, 
+      // remove promotion in old item
+      await Items.update(
+        { promotionId : null },
+        {
+          where: {
+            categoryId: singlePromotion.dataValues.categoryId,
+          },
+        }
+      );
+      // add new promotion in new item
+      await Items.update(
+        { promotionId : promotionId },
+        {
+          where: {
+            categoryId: category,
+          },
+        }
+      );
+    }
+
       return res.status(200).json({ msg: "Promotion has been updated"})
   }catch(e) {
     return res.status(500).json(e.message);

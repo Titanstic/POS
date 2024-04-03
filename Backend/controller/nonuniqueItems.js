@@ -40,29 +40,23 @@ router.get("/:id", async (req, res) => {
 // add non unique item
 router.post("/", upload.single("image"), async (req, res) => {
   // console.log(req.body);
-  let {
-    name,
-    sale_price,
-    purchase_price,
-    categoryId,
-    note,
-    quantity,
-    discount,
-    minQty,
-    lost,
-    expiredDate,
-  } = req.body;
+  let {name, sale_price, purchase_price, categoryId, note, quantity, discount, minQty, lost, expiredDate,} = req.body;
   const salePrice = sale_price - discount;
   // console.log(salePrice);
   sale_price = salePrice;
   const tQuantity = quantity - lost;
   quantity = tQuantity;
   try {
+    const promotion = await Promotion.findOne({
+      order: [["id", "DESC"]]
+    });
+
     await nonuniqueItem.create({
       name,
       sale_price,
       purchase_price,
       categoryId,
+      promotionId: promotion.dataValues.id,
       note,
       quantity,
       discount,
@@ -79,9 +73,6 @@ router.post("/", upload.single("image"), async (req, res) => {
 
 //update non unique item
 router.put("/:id", upload.single("image"), async (req, res) => {
-  // const nonUniqueId = req.params.id;
-  // const { name, price, image, quantity, note, categoryId } = req.body;
-  console.log(req.body);
   let {
     id,
     name,
@@ -112,7 +103,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
           name,
           sale_price,
           purchase_price,
-          category,
+          categoryId: category,
           note,
           quantity,
           discount,
@@ -129,7 +120,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
           name,
           sale_price,
           purchase_price,
-          category,
+          categoryId: category,
           note,
           quantity,
           discount,

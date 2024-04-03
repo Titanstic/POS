@@ -76,21 +76,29 @@ const controlTotalQuality = (action, data, d) => {
         newData.push(da);
       }
 
-      amount -= da.promotion === null? (da.sale_price* da.qty) :(new Date(da.promotion?.startDate+ "T00:00:00Z")<= new Date && 
-    new Date()<= new Date(da.promotion?.endDate+ "T23:59:59Z"))? ((da.sale_price - (da.sale_price * da.promotion?.promotionValue/100))*da.qty) : 
-    (da.sale_price * da.qty);
+      amount -= da.promotion === null ?
+          (da.sale_price* da.qty)
+          :
+          (new Date(da.promotion?.startDate+ "T00:00:00Z")<= new Date && new Date()<= new Date(da.promotion?.endDate+ "T23:59:59Z")) ?
+              ((da.sale_price - (da.sale_price * da.promotion?.promotionValue/100))*da.qty)
+              :
+              (da.sale_price * da.qty);
     });
   } else {
     data.forEach((da) => {
       if (da.no === d.no && da.name === d.name && da.qty < d.quantity) {
-        amount += d.promotion === null? (d.sale_price* d.qty) :(new Date(d.promotion?.startDate+ "T00:00:00Z")<= new Date && 
-        new Date()<= new Date(d.promotion?.endDate+ "T23:59:59Z"))? ((d.sale_price - (d.sale_price * d.promotion?.promotionValue/100))*d.qty) : 
-        (d.sale_price * d.qty);
         newData.push({ ...d, qty: ++d.qty });
       } else {
-        amount = da.sale_price * da.qty;
         newData.push(da);
       }
+
+      amount += da.promotion === null ?
+          (da.sale_price* da.qty)
+          :
+          (new Date(da.promotion?.startDate+ "T00:00:00Z")<= new Date && new Date()<= new Date(da.promotion?.endDate+ "T23:59:59Z")) ?
+              ((da.sale_price - (da.sale_price * da.promotion?.promotionValue/100))*da.qty)
+              :
+              (da.sale_price * da.qty);
     });
   }
 

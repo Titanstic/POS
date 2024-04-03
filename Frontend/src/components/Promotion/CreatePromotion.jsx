@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   useGetCategoryQuery,
@@ -109,7 +109,8 @@ const CreatePromotion = () => {
                 className="w-full outline-none p-2 border shadow-md rounded mt-2"
                 onChange={(e) => inputHandler(e, "selected category")}
               >
-                <option value="">Choose Category</option>
+                <option value="" disabled>Choose Category</option>
+
                 {data?.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}

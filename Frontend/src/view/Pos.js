@@ -154,11 +154,8 @@ const Pos = () => {
 
   const controlQty = (action, d) => {
     const { newData, amount } = controlTotalQuality(action, data, d);
-    if (action === "plus") {
-      setTotalAmount((prevTotal) => prevTotal + d.sale_price);
-    } else {
-      setTotalAmount(Math.abs(amount));
-    }
+
+    setTotalAmount(Math.abs(amount));
     setData(newData);
   };
 
@@ -224,7 +221,7 @@ const Pos = () => {
     <div className="w-full h-screen overflow-hidden bg-bg_two relative">
       <Nav />
 
-      <div className="grid grid-cols-9 h-full pt-1">
+      <div className="h-[89vh] grid grid-cols-9 pt-1">
         <div className="col-span-4 bg-bg_one shadow-md p-3">
           <div className="flex gap-3 relative">
             <img
@@ -293,9 +290,11 @@ const Pos = () => {
                       (d.sale_price * d.qty).toLocaleString('en-Us')} Ks
                     </td>
                     <td className="w-1/12 border border-bg_three text-center py-2">
-                    {d.promotion === null ? 0 + "%" : 
-    (new Date(d.promotion?.startDate )<= new Date() && new Date() <= new Date(d.promotion?.endDate)) ?
-    d.promotion.promotionValue + "%" : 0 
+                    {d.promotion === null ?
+                        0 + "%"
+                        :
+                        (new Date(d.promotion?.startDate+ "T00:00:00Z") <= new Date() && new Date() <= new Date(d.promotion?.endDate+ "T23:59:59Z")) ?
+                        d.promotion.promotionValue + "%" : 0
   }
                     </td>
                     <td className="w-1/12 border border-bg_three text-center py-2">
@@ -364,7 +363,7 @@ const Pos = () => {
         </div>
 
         {/* Start Category & filter */}
-        <div className="col-span-5 p-3">
+        <div className="h-full col-span-5 p-3">
           {/* Start Category */}
           <div>
             <p className="text-xl font-bold font-poppins">Categories</p>
@@ -411,22 +410,12 @@ const Pos = () => {
 
           {/* Start Filter */}
           <div className="mt-5">
-            {/* <div className="flex justify-end">
-              <select id="countries" className="border text-skin-fill font-bold rounded p-2.5">
-                <option selected>Filter By</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
-              </select>
-            </div> */}
-
-            <div className="h-[430px] grid grid-cols-3 gap-4 mt-3 overflow-y-auto pr-1">
+            <div className="h-[67vh] grid grid-cols-3 gap-4 mt-3 overflow-y-auto pr-1 py-2">
               {categoryItems ? (
                 categoryItems.length > 0 ? (
                   categoryItems.map((c) => (
                     <div
-                      className="h-56 bg-white overflow-hidden rounded-lg shadow-md cursor-pointer hover:shadow-xl mt-2"
+                      className="h-60 bg-white overflow-hidden rounded-lg shadow-md cursor-pointer hover:shadow-xl mt-2"
                       key={c.id}
                       onClick={() => categoryBtn(c)}
                     >
@@ -448,12 +437,13 @@ const Pos = () => {
                           {c.name}
                         </h5>
                         <p className="mb-3 font-normal text-error">
-                        {c.promotion === null ? 
-    c.sale_price.toLocaleString("en-Us") :
-    (new Date(c.promotion?.startDate+ "T00:00:00Z") <= new Date() && new Date() <= new Date(c.promotion?.endDate+ "T23:59:59Z")) ?
-    (c.sale_price - (c.sale_price * c.promotion?.promotionValue / 100)).toLocaleString("en-Us") :
-    c.sale_price.toLocaleString("en-Us")
-  } Ks
+                        {c.promotion === null ?
+                            c.sale_price.toLocaleString("en-Us") :
+                            (new Date(c.promotion?.startDate+ "T00:00:00Z") <= new Date() && new Date() <= new Date(c.promotion?.endDate+ "T23:59:59Z")) ?
+                                (c.sale_price - (c.sale_price * c.promotion?.promotionValue / 100)).toLocaleString("en-Us")
+                                :
+                                c.sale_price.toLocaleString("en-Us")
+                        } Ks
                         </p>
                       </div>
                     </div>

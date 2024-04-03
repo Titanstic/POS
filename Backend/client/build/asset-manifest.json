@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.a36e3897.css",
-    "main.js": "/static/js/main.fb740274.js",
+    "main.css": "/static/css/main.bb9a7732.css",
+    "main.js": "/static/js/main.891549f8.js",
     "static/media/mula-logo.png": "/static/media/mula-logo.95b324c7509387a8b226.png",
     "static/media/viber_image_2024-02-07_11-41-50-376.png": "/static/media/viber_image_2024-02-07_11-41-50-376.16a0c04c09641807e238.png",
     "static/media/excel.png": "/static/media/excel.4d36eb9f7a5e1f9b368f.png",
     "index.html": "/index.html",
-    "static/media/vector.svg": "/static/media/vector.d75ce1ba1fc02a687ae619e58d75c575.svg",
-    "main.a36e3897.css.map": "/static/css/main.a36e3897.css.map",
-    "main.fb740274.js.map": "/static/js/main.fb740274.js.map"
+    "static/media/vector.svg": "/static/media/vector.01313e3e7b905fbdac1ca198fda16347.svg",
+    "main.bb9a7732.css.map": "/static/css/main.bb9a7732.css.map",
+    "main.891549f8.js.map": "/static/js/main.891549f8.js.map"
   },
   "entrypoints": [
-    "static/css/main.a36e3897.css",
-    "static/js/main.fb740274.js"
+    "static/css/main.bb9a7732.css",
+    "static/js/main.891549f8.js"
   ]
 }

@@ -17,7 +17,7 @@ const Sidebar = () => {
   }, [data, blogs]);
 
   return (
-    <div className="w-[300px] bg-black overflow-y-auto bg-bg bg-opacity-10 border-r px-5 py-2 shadow-xl font-poppins">
+    <div className="w-[20%] bg-black overflow-y-auto bg-bg bg-opacity-10 border-r px-5 py-2 shadow-xl font-poppins">
       {category?.map((c) => (
         <div key={c.id}>
           <h1 className="text-xl font-semibold">{c.name}</h1>

@@ -49,7 +49,8 @@ app.use("/supplier", supplierRouter);
 app.use("/promotion", promotionRouter);
 const port = process.env.PORT || 8080;
 
-sequelize
+const serverStart = async () => {
+  await sequelize
   .sync({ force: false })
   .then(() => {
     app.listen(port, () => console.log(`Server is running at port ${port}`));
@@ -60,3 +61,7 @@ sequelize
   .catch((err) => {
     console.log(err);
   });
+
+}
+
+module.exports = serverStart;

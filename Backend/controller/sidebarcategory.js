@@ -3,7 +3,33 @@ const Category = require("../model/sidebarcategory");
 
 router.get("/", async (req, res) => {
   try {
-    const categories = await Category.findAll();
+    // const categories = await Category.findAll();
+    const categories = [
+      {
+          "id": 1,
+          "name": "Products",
+          "createdAt": "2023-11-24T08:57:55.639Z",
+          "updatedAt": "2023-11-24T08:57:55.639Z"
+      },
+      {
+          "id": 2,
+          "name": "Reports",
+          "createdAt": "2023-11-24T08:58:41.361Z",
+          "updatedAt": "2023-11-24T08:58:41.361Z"
+      },
+      {
+          "id": 3,
+          "name": "Settings",
+          "createdAt": "2023-11-24T08:59:00.995Z",
+          "updatedAt": "2023-11-24T08:59:00.995Z"
+      },
+      {
+          "id": 4,
+          "name": "Renting",
+          "createdAt": "2023-11-24T08:59:00.995Z",
+          "updatedAt": "2023-11-24T08:59:00.995Z"
+      }
+  ]
     return res.json(categories);
   } catch (e) {
     return res.status(500).json(e);

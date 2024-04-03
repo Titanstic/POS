@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   useAddCategoryMutation,
   useAddNonUniqueItemMutation,
@@ -219,11 +219,11 @@ const CreateNonUnique = () => {
                   inputHandle(e.target.value, "selectedCategoryId")
                 }
                 className={`w-full border ${error.selectedCategoryId
-                    ? "border-error"
-                    : "border--skin-fill"
+                  ? "border-error"
+                  : "border--skin-fill"
                   } shadow-md focus:outline-none rounded-md bg-transparent p-2 `}
               >
-                <option>Select Category</option>
+                <option disabled>Select Category</option>
 
                 {data?.map((d) => (
                   <option key={d.id} value={d.id}>
