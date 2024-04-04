@@ -9,6 +9,7 @@ import NavContext from "../../context/NavContext";
 const CreatePromotion = () => {
   const navigate = useNavigate()
   const [name, setName] = useState("");
+  const [allCat, setAllCat ] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [promotionValue, setPromotionValue] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -21,8 +22,13 @@ const CreatePromotion = () => {
   const { nav, setNav } = useContext(NavContext);
 
   useEffect(() => {
+    if(data){
+      data.forEach((d, index) => {
+        setAllCat((prev) => prev+= d.id + `${index < data.length - 1 ? "," : ""}`)
+      })
+    }
     setNav("promotion");
-  }, [nav, setNav]);
+  }, [nav, setNav, data]);
 
   const inputHandler = (e, input) => {
     switch (input) {
@@ -110,7 +116,7 @@ const CreatePromotion = () => {
                 onChange={(e) => inputHandler(e, "selected category")}
               >
                 <option value="" disabled>Choose Category</option>
-
+                <option value={allCat}>All</option>
                 {data?.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}

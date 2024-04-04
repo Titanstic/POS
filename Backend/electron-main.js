@@ -22,7 +22,7 @@ function createWindow() {
   mainWindow.loadURL(`http://localhost:4500/index.html`);
 
   // Open DevTools (optional)
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', () => {
     mainWindow = null;

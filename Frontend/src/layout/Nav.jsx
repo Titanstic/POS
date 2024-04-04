@@ -55,7 +55,7 @@ const Nav = () => {
     <div className="h-[11vh]">
       <div className="flex justify-between items-center bg-skin-nav w-full h-full shadow-md py-2  ">
         <img
-          src={icons.bePos}
+          src={icons.logo}
           alt="mula_logo"
           className="w-[70px] h-auto object-cover ml-10"
         />

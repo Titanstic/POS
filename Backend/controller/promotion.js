@@ -34,24 +34,27 @@ router.get('/:id',async(req,res)=>{
 router.post("/", async (req, res) => {
   const { name, selectedCategory, promotionValue, startDate, endDate } = req.body;
   try {
-  const promotionData =  await Promotion.create({
-      name,
-      categoryId : selectedCategory,
-      promotionValue,
-      startDate,
-      endDate,
-    });
+    for (const cat of selectedCategory.split(',')) {
+      const promotionData =  await Promotion.create({
+          name,
+          categoryId : cat,
+          promotionValue,
+          startDate,
+          endDate,
+        });
 
-    const promoId = promotionData.id;
-   
-    await Items.update(
-      { promotionId : promoId },
-      {
-        where: {
-          categoryId: selectedCategory,
-        },
-      }
-    );
+        const promoId = promotionData.id;
+
+        await Items.update(
+          { promotionId : promoId },
+          {
+            where: {
+              categoryId: cat,
+            },
+          }
+        );
+    }
+
     return res.status(200).json({ msg: "promotion added" });
   } catch (e) {
     return res.status(500).json(e.message);

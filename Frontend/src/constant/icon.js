@@ -17,6 +17,7 @@ import setting from "../assets/icons/settings.png";
 import excel from "../assets/icons/excel.png";
 import addIcon from "../assets/icons/vector.svg";
 import bePos from "../assets/icons/viber_image_2024-02-07_11-41-50-376.png"
+// import mula from "../assets/icons/mula"
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
